@@ -1,9 +1,9 @@
-package com.momo.toys.be.model;
+package com.logistics.model;
 
 import java.io.Serializable;
 import java.util.Calendar;
 
-import com.momo.toys.be.enumeration.MessageType;
+import com.logistics.enumeration.MessageType;
 
 public class KafkaMessage implements Serializable{
 

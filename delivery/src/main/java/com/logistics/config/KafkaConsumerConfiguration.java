@@ -29,22 +29,17 @@ public class KafkaConsumerConfiguration{
     @Bean
     public ConsumerFactory<String, byte[]> consumerFactory() {
 
-        JsonDeserializer<String> deserializer = new JsonDeserializer<>(String.class);
-        deserializer.setRemoveTypeHeaders(false);
-        deserializer.addTrustedPackages("*");
-        deserializer.setUseTypeMapperForKey(true);
-
         Map<String, Object> configurations = new HashMap<>();
         configurations.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, KafkaConstants.KAFKA_BROKER);
+        configurations.put(ConsumerConfig.CLIENT_ID_CONFIG, "TOY_BE");
         configurations.put(ConsumerConfig.GROUP_ID_CONFIG, KafkaConstants.GROUP_ID);
 
         configurations.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-        configurations.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, deserializer);
+        configurations.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "com.logistics.factory.KafkaMessageDeserializer");
 
         configurations.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
-        configurations.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);
 
-        return new DefaultKafkaConsumerFactory<>(configurations, new StringDeserializer(), new JsonDeserializer<>());
+        return new DefaultKafkaConsumerFactory<>(configurations);
     }
 
 }

@@ -1,4 +1,4 @@
-package com.momo.toys.be.enumeration;
+package com.logistics.enumeration;
 
 public enum MessageType{
     CHAT, JOIN, LEAVE
