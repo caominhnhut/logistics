@@ -13,11 +13,6 @@ public class KafkaMessageDeserializer implements Deserializer<KafkaMessage>{
     private ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
-    public void configure(Map<String, ?> configs, boolean isKey){
-
-    }
-
-    @Override
     public KafkaMessage deserialize(String s, byte[] data){
         try {
             if (data == null){
@@ -32,7 +27,12 @@ public class KafkaMessageDeserializer implements Deserializer<KafkaMessage>{
     }
 
     @Override
-    public void close(){
+    public void configure(Map<String, ?> configs, boolean isKey){
+        Deserializer.super.configure(configs, isKey);
+    }
 
+    @Override
+    public void close(){
+        Deserializer.super.close();
     }
 }
